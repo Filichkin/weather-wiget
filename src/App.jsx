@@ -5,14 +5,19 @@ import "./index.css";
 const API_KEY = "";
 
 function App() {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("Milan");
   const [weatherData, setWeatherData] = useState(null);
 
-  async function getData() {
-    const res = await fetch("http://api.weatherapi.com/v1")
-  }
-  
-  
+  useEffect(() => {
+    async function getData() {
+    const res = await fetch(`http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`);
+    const data = await res.json();
+    setWeatherData(data);
+    }
+    getData();
+  }, []);
+
+console.log(weatherData);
 
   return (
     <div className="app">
@@ -24,16 +29,16 @@ function App() {
             <input type="text" placeholder="Enter city name" className="search-input" />
           </div>
         </div>
-        <div className="weather-card">
-          <h2>Moscow, Russia</h2>
-          <img src="" alt="icon" className="weather-icon" />
-          <p className="temperature">11°C</p>
-          <p className="condition">rainy</p>
-          <div className="weather-details">
-            <p>Humidity: 20%</p>
-            <p>Wind: 22 km/h</p>
+          <div className="weather-card">
+            <h2>{`${weatherData?.location.name}, ${weatherData?.location.country}`}</h2>
+            <img src="" alt="icon" className="weather-icon" />
+            <p className="temperature">11°C</p>
+            <p className="condition">rainy</p>
+            <div className="weather-details">
+              <p>Humidity: 20%</p>
+              <p>Wind: 22 km/h</p>
+            </div>
           </div>
-        </div>
       </div>
     </div>
   );
