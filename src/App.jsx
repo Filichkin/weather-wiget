@@ -32,7 +32,7 @@ function App() {
     }
   }
     getData();
-}, []);
+}, [city]);
 
 console.log(weatherData);
 
@@ -42,7 +42,12 @@ console.log(weatherData);
         <div className="weather-card-container">
           <h1 className="app-title">Weather Widget</h1>
           <div className="search-container">
-            <input type="text" placeholder="Enter city name" className="search-input" />
+            <input
+              type="text"
+              value={city} 
+              placeholder="Enter city name"
+              className="search-input" onChange={(e) => setCity(e.target.value)}
+            />
           </div>
         </div>
           <div className="weather-card">
