@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./index.css";
 
 
-const API_KEY = "";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 function App() {
   const [city, setCity] = useState("");
